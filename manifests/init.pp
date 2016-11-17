@@ -12,7 +12,7 @@ class homebrew(
   $tapsdir      = $homebrew::config::tapsdir,
   $brewsdir     = $homebrew::config::brewsdir,
   $min_revision = $homebrew::config::min_revision,
-  $repo         = 'Homebrew/brew',
+  $repo         = 'KoushikDasika/brew',
   $set_cflags   = true,
   $set_ldflags  = true,
 ) inherits homebrew::config {
@@ -55,9 +55,9 @@ class homebrew(
   exec { "install homebrew to ${installdir}":
     command => "git init -q &&
                 git config remote.origin.url https://github.com/${repo} &&
-                git config remote.origin.fetch master:refs/remotes/origin/master &&
-                git fetch origin master:refs/remotes/origin/master -n &&
-                git reset --hard origin/master",
+                git config remote.origin.fetch master:refs/remotes/origin/stable &&
+                git fetch origin master:refs/remotes/origin/stable -n &&
+                git reset --hard origin/stable",
     cwd     => $installdir,
     user    => $::boxen_user,
     creates => "${installdir}/.git",
